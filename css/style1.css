@@ -1,5 +1,14 @@
 body {
-    background-color: black;
+    background: #000000;
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 42%,
+        rgba(27, 37, 74, 1) 100%
+    );
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-attachment: fixed;
 }
 .bottom-nav {
     ul {
@@ -53,17 +62,32 @@ body {
     color: white;
 }
 .card1 {
-    background-color: green;
-    border: solid 1px white;
+    background-color: black;
+    border: solid 0.5px white;
     border-radius: 30px;
     width: 500px;
-    h1 {
-        color: black;
-    }
+    color: white;
     p {
-        color: white;
+        color: wheat;
     }
 }
 .mail.fa-solid.fa-envelope.fa-2xl {
     color: #5254e8;
+}
+.welcome {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: absolute;
+
+    /* 1. Position it close to the bottom edge */
+    bottom: 11%;
+
+    /* 2. Start the element's left edge at the center of the page */
+    left: 50%;
+
+    /* 3. Shift the element back to the left by half of its own width.
+         This perfectly centers it on the page.
+      */
+    transform: translateX(-50%);
 }
