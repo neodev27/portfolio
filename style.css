@@ -1,0 +1,218 @@
+/* ---------- Layout / mevcut stiller için düzeltmeler ---------- */
+
+/* .bottom-nav: SCSS yerine düz CSS kullan */
+main.card1 {
+    background-color: white;
+    border: 2px white;
+}
+
+.bottom-nav ul {
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+.bottom-nav li {
+    /* float yerine flex kullanıyoruz ama float kalırsa da sorun olmaz */
+    list-style: none;
+}
+.bottom-nav img {
+    width: 55px;
+    height: 55px;
+    border: #036f39 2px solid;
+    border-radius: 15px;
+    /* Eğer flex kullanıyorsak float'a gerek yok, fakat bırakılabilir */
+}
+.bottom-nav a {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+}
+.bottom-nav {
+    width: 100%;
+    bottom: 2%;
+    position: fixed;
+    right: 0;
+    z-index: 3; /* üstte görünmesi için */
+}
+.bottom-nav p {
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: larger;
+}
+/* main içindeki p için düz CSS */
+main p {
+    color: white;
+}
+#second-mail.fa-solid.fa-envelope.fa-2xl {
+    color: teal;
+}
+/* ---------- Starfield için gerekli global ayarlar ---------- */
+:root {
+    --bg-color: #030217;
+    --star-count: 200;
+    --speed-factor: 0.75;
+    --inactive-delay: 2000ms;
+    --fade-duration: 1000ms;
+}
+
+/* Arka plan rengini zorla uygula (yıldızlarla kontrast için) */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg-color);
+    overflow: hidden;
+}
+
+/* main içeriğinin yıldızların üstünde olması için */
+main {
+    position: relative;
+    z-index: 2;
+}
+
+/* ---------- Starfield stilleri (geçerli CSS) ---------- */
+.starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--fade-duration) ease;
+}
+.starfield.visible {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity, box-shadow, filter;
+    opacity: 0.9;
+    --size: 2px;
+    width: var(--size);
+    height: var(--size);
+    background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.8));
+    box-shadow: 0 0 calc(var(--size) * 8) rgba(255, 255, 255, 0.08);
+    transition:
+        opacity 1.5s ease,
+        box-shadow 400ms ease,
+        filter 300ms ease;
+}
+
+@keyframes driftX {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(30vw, -10vh, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes driftY {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-15vw, 20vh, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.starfield.hidden .star {
+    opacity: 0;
+    filter: blur(1px);
+    box-shadow: none;
+    transition:
+        opacity var(--fade-duration) ease,
+        box-shadow 500ms ease,
+        filter 800ms ease;
+}
+
+.star.glow {
+    box-shadow:
+        0 0 calc(var(--size) * 14) rgba(255, 255, 255, 0.85),
+        0 0 6px rgba(255, 255, 230, 0.35);
+    transform: scale(1.07);
+}
+
+.star.pulse {
+    filter: brightness(1.8) saturate(1.1);
+    box-shadow:
+        0 0 calc(var(--size) * 24) rgba(255, 255, 255, 0.95),
+        0 0 10px rgba(255, 250, 230, 0.5);
+    transition:
+        filter 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+}
+
+/* reduced motion desteği */
+@media (prefers-reduced-motion: reduce) {
+    .star {
+        animation: none !important;
+        transform: none !important;
+    }
+    .starfield {
+        transition: none !important;
+    }
+}
+/* Navbar görünürlük ve glow efekti */
+.bottom-nav {
+    opacity: 0;
+    transition:
+        opacity 2s ease,
+        box-shadow 1.5s ease;
+}
+
+/* Site yüklenince yavaşça görünmesi için */
+.bottom-nav.visible {
+    opacity: 1;
+}
+
+/* Glow efekti */
+.bottom-nav.glow {
+    box-shadow:
+        0 0 20px rgba(255, 255, 200, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Pulse efekti — beklerken hafif yanıp sönme */
+@keyframes navbarPulse {
+    0% {
+        box-shadow:
+            0 0 20px rgba(255, 255, 200, 0.8),
+            0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            0 0 35px rgba(255, 255, 200, 1),
+            0 0 18px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        box-shadow:
+            0 0 20px rgba(255, 255, 200, 0.8),
+            0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Pulse sınıfı */
+.bottom-nav.pulse {
+    animation: navbarPulse 1.5s ease-in-out;
+}
