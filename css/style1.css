@@ -7,7 +7,7 @@ body {
         rgba(27, 37, 74, 1) 100%
     );
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 100%;
     background-attachment: fixed;
 }
 .bottom-nav {
@@ -29,7 +29,7 @@ body {
         list-style: none;
     }
 
-    img {
+    img.logo {
         width: 55px;
         height: 55px;
         border: #036f39 2px solid;
@@ -48,12 +48,18 @@ body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: larger;
     }
-
+    p.name {
+        color: #ffffff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 150%;
+    }
     width: 100%;
-    bottom: 2%;
     position: fixed;
     right: 0;
-    z-index: 3; /* üstte görünmesi için */
+    z-index: 3;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .second-mail.fa-solid.fa-envelope.fa-2xl {
     color: #52a052;
@@ -62,10 +68,6 @@ body {
     color: white;
 }
 .card1 {
-    background-color: black;
-    border: solid 0.5px white;
-    border-radius: 30px;
-    width: 500px;
     color: white;
     p {
         color: wheat;
@@ -74,20 +76,76 @@ body {
 .mail.fa-solid.fa-envelope.fa-2xl {
     color: #5254e8;
 }
-.welcome {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    position: absolute;
 
-    /* 1. Position it close to the bottom edge */
-    bottom: 11%;
+.introduction {
+    color: wheat;
+    font-size: 200%;
+}
+/* Mobil cihazlar için (telefonlar, max 600px) */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; /* Genel yazı boyutunu küçült */
+    }
 
-    /* 2. Start the element's left edge at the center of the page */
-    left: 50%;
+    .card1 {
+        padding: 10px; /* Kart kenar boşluklarını küçült */
+        font-size: 16px; /* Giriş metnini okuabilir hale getir */
+    }
 
-    /* 3. Shift the element back to the left by half of its own width.
-         This perfectly centers it on the page.
-      */
-    transform: translateX(-50%);
+    .introduction {
+        font-size: 150%; /* %150 yerine orijinalin %75'i gibi küçült */
+    }
+
+    .bottom-nav ul {
+        flex-wrap: wrap; /* Eğer öğeler sığmazsa alt satıra geçsin */
+        gap: 5px; /* Boşlukları küçült */
+        padding: 5px; /* Kenar boşluklarını azalt */
+    }
+
+    .bottom-nav a {
+        padding: 10px; /* Link padding'ini küçült */
+    }
+
+    .bottom-nav img.logo {
+        width: 40px; /* Logo'yu küçült */
+        height: 40px;
+    }
+
+    p.name {
+        font-size: 125%; /* İsim boyutunu küçült */
+    }
+
+    .fa-2xl {
+        font-size: 1.6em; /* İkon boyutlarını küçült (Font Awesome için) */
+    }
+.bottom-nav ul li:last-child {           /* SVG'nin olduğu son li */
+        position: absolute;
+        bottom: 100%;                        /* navbar'ın tam üstüne */
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 15px;                 /* navbar ile arasına mesafe */
+    }
+    
+    .bottom-nav ul li:last-child a {
+        padding: 0;
+        background: none;
+        border: none;
+    }
+    
+    .bottom-nav ul li:last-child img {
+        width: 300%;
+        max-width: 85vw;
+        height: auto;
+    }
+}
+
+/* Tabletler için (orta boyut, max 768px) */
+@media (max-width: 768px) {
+    .bottom-nav {
+        bottom: 0; /* Alt navigasyonu tam alta yapıştır, %3 yerine */
+    }
+
+    .card1 p {
+        font-size: 16px; /* Metinleri okuabilir hale getir */
+    }
 }
